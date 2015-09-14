@@ -1,0 +1,56 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">Написать новую статью</div>
+    <div class="panel-body">
+<%= form_for(@article) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Название</label>
+                <%= f.text_field :name, :class => "form-control", :id => "exampleInputEmail1", :placeholder => "Введите название статьи", :required => true %>
+            </div>
+            <% if current_user.role == "admin" %>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Описание (meta)</label>
+                <%= f.text_field :description, :class => "form-control", :id => "exampleInputEmail1", :placeholder => "Описание для поисковиков", :required => true %>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ключевые слова (meta)</label>
+                <%= f.text_field :keywords, :class => "form-control", :id => "exampleInputEmail1", :placeholder => "Ключевые слова для поисковиков", :required => true %>
+            </div>
+            <% end %>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Обложка статьи</label>
+              <% if @article.image? %>
+                  <%= image_tag @article.image.thumb.url %> <%= f.file_field :image, :class => "form-control" %>
+              <% else %>
+                  <div class="fancy-file-upload fancy-file-info">
+                    <i class="fa fa-upload"></i>
+                    <%= f.file_field :image, :class => "form-control", :required => true %>
+                    <input type="text" class="form-control" placeholder="обложка не выбрана" readonly="" />
+                    <span class="button">Выбрать файл</span>
+                  </div>
+                  
+              <% end %>  
+            </div>          
+            <div class="form-group">
+                <label for="select">Категория</label>
+                <%= f.collection_select(:category_id, Category.all, :id, :name, {}, { :multiple => false, :class => "form-control", :id => "select", :required => true } ) %>
+            </div>
+            <div class="form-group">
+                <label>Текст</label>
+                <%= f.cktext_area :text, :class => "form-control", :rows => "20", :required => true, :ckeditor => { :toolbar => 'mini'} %>
+            </div>
+            <%= f.submit "Отправить", :class => "btn btn-rw btn-primary" %>
+            <%= link_to "Отменить", :back, :class => "btn btn-royal btn-rw" %>
+        <% end %>
+    </div><!-- /panel body -->
+</div><!-- /panel -->

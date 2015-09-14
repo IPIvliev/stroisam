@@ -1,0 +1,157 @@
+    <!-- -->
+      <section>
+        <div class="container">
+
+          <div class="row">
+
+
+            <!-- LOGIN -->
+            <div class="col-md-4 col-sm-5">
+
+              <div class="box-static box-border-top padding-30">
+                <div class="box-title margin-bottom-30">
+                  <h2 class="size-20">У меня уже есть аккаунт на "Строй сам"</h2>
+                </div>
+
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'sky-form'}) do |f| %>
+                  <div class="clearfix">
+
+                    <!-- Email -->
+                    <div class="form-group">
+                      <label>Email</label>
+                      <label class="input margin-bottom-10">
+                        <i class="ico-append fa fa-envelope"></i>
+                        <%= f.email_field :email, :placeholder => "Введите email", :required => true %>
+                        <b class="tooltip tooltip-bottom-right">Введите свой email</b>
+                      </label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                      <label>Пароль</label>
+                      <label class="input margin-bottom-10">
+                        <i class="ico-append fa fa-lock"></i>
+                        <%= f.password_field :password, autocomplete: "off", :placeholder => "Введите пароль", :required => true %>
+                        <b class="tooltip tooltip-bottom-right">Введите свой пароль</b>
+                      </label>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      
+                      <!-- Inform Tip -->                                        
+                      <div class="form-tip pt-20">
+                        <a class="no-text-decoration size-13 margin-top-10 block" href="#">Забыли пароль?</a>
+                      </div>
+                      
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+
+                      <button class="btn btn-primary"><i class="fa fa-check"></i> Войти</button>
+
+                    </div>
+
+                  </div>
+
+                <% end %>
+
+              </div>
+
+            </div>
+            <!-- /LOGIN -->
+
+
+            <!-- REGISTER -->
+            <div class="col-md-8 col-sm-7">
+
+                <div class="alert alert-mini alert-danger margin-bottom-30">
+                  <%= devise_error_messages! %>
+                </div>
+
+              <div class="box-static box-transparent box-bordered padding-30">
+
+                <div class="box-title margin-bottom-30">
+                  <h2 class="size-20">Ещё нет аккаунта?</h2>
+                </div>
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'nomargin sky-form'}) do |f| %>
+                  <fieldset>
+
+                    <div class="row">
+                      <div class="form-group">
+
+                        <div class="col-md-6 col-sm-6">
+                          <label>Имя *</label>
+                          <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-user"></i>
+                            <%= f.text_field :name, :placeholder => "Ваше Имя", :required => true %>
+                            <b class="tooltip tooltip-bottom-right">Ваше имя</b>
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group">
+
+                        <div class="col-md-6 col-sm-6">
+                          <label for="register:email">Email *</label>
+                          <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-envelope"></i>
+                            <%= f.email_field :email, autofocus: true, :placeholder => "Ваш email", :required => true %>
+                            <b class="tooltip tooltip-bottom-right">Ваш Email</b>
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group">
+
+                        <div class="col-md-6 col-sm-6">
+                          <label for="register:pass1">Пароль *</label>
+                          <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-lock"></i>
+                            <%= f.password_field :password, autocomplete: "off", :placeholder => "Пароль", :required => true %>
+                            <b class="tooltip tooltip-bottom-right">Минимум 8 знаков</b>
+                          </label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                          <label for="register:pass2">Повторите пароль *</label>
+                          <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-lock"></i>
+                            <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Повторите пароль", :required => true %>
+                            <b class="tooltip tooltip-bottom-right">Наберите свой пароль снова</b>
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </fieldset>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Регистрация</button>
+                    </div>
+                  </div>
+
+                <% end %>
+                
+              </div>
+
+            </div>
+            <!-- /REGISTER -->
+
+
+          </div>
+
+        </div>
+      </section>

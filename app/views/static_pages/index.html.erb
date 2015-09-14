@@ -1,0 +1,58 @@
+			<section>
+				<div class="container">
+
+					<div class="row">
+
+						<!-- LEFT -->
+<!-- RIGHT -->
+						<div class="col-md-9 col-sm-9">
+
+							<div class="row">
+
+								<% @articles.each do |a| %>
+								<!-- POST ITEM -->
+								<div class="blog-post-item col-md-4 col-sm-4">
+
+									<!-- IMAGE -->
+									<figure class="margin-bottom-20">
+										<%= image_tag a.image.thumb.url, :class => "img-responsive", :alt => a.name %>
+									</figure>
+
+									<h2><%= link_to a.name, article_path(a) %></h2>
+
+									<ul class="blog-post-info list-inline">
+										<li>
+											<a href="#">
+												<i class="fa fa-clock-o"></i> 
+												<span class="font-lato"><%= Russian::strftime(a.created_at, "%d %B %Y") %></span>
+											</a>
+										</li>
+										<% if a.comments.exists? %>
+											<li>
+												<a href="#">
+													<i class="fa fa-comment-o"></i> 
+													<span class="font-lato"><%= a.comments.count %></span>
+												</a>
+											</li>
+										<% end %>
+									</ul>
+
+									<p><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 200, :omission => "...").html_safe %></p>
+
+									<%= link_to "<i class='fa fa-plus'></i><span>Read More</span>".html_safe, article_path(a), :class => "btn btn-reveal btn-default" %>
+								</div>
+								<!-- /POST ITEM -->
+								<% end %>
+
+							</div>
+
+
+						</div>
+
+						<%= render "/shared/column" %>
+
+					</div>
+
+
+				</div>
+			</section>

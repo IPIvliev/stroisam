@@ -1,0 +1,82 @@
+		<!-- wrapper -->
+		<div id="wrapper">
+
+			<div id="header" class="sticky header-sm clearfix">
+
+				<!-- TOP NAV -->
+				<header id="topNav">
+					<div class="container">
+
+						<!-- Mobile Menu Button -->
+						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Logo -->
+						<a class="logo pull-left" href="index.html">
+							<img src="assets/images/logo_dark.png" alt="" />
+						</a>
+
+						<div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+							<nav class="nav-main">
+
+								<ul id="topMain" class="nav nav-pills nav-main">
+									<li>
+										<%= link_to "Главная", root_path %>
+									</li>
+									<li>
+										<a href="/about.html">
+											О проекте
+										</a>
+									</li>
+									<li>
+										<a href="/contacts.html">
+											Контакты
+										</a>
+									</li>
+									<% if current_user %>
+
+										<li style="background-color: #bbb">
+											<a href="/users/sign_up" style="color: #fff; font-weight: bold;">
+												Профайл
+											</a>
+										</li>
+										<li style="background-color: orange">
+											<%= link_to "Выход", destroy_user_session_path, :method => :delete, :rel => "nofollow", :style => "color: #fff; font-weight: bold;" %>
+										</li>
+									<% else %>
+										<li style="background-color: #bbb">
+											<a href="/users/sign_up" style="color: #fff; font-weight: bold;">
+												Логин
+											</a>
+										</li>
+										<li style="background-color: #8AB933">
+											<a href="/users/sign_up" style="color: #fff; font-weight: bold;">
+												Регистрация
+											</a>
+										</li>
+									<% end %>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</header>
+				<!-- /Top Nav -->
+
+			</div>
+
+			<section class="page-header dark page-header-xs" style="background-image:url('/images/imgpattern2.jpg')">
+				<div class="container">
+
+					<h1 style="color: #000; background-color:#fff; width: 150px;">BLOG</h1>
+					<span class="font-lato size-18 weight-300 hidden-xs" style="color: #000; background-color:#fff; width: 150px;">We believe in Simple &amp; Creative</span>
+
+					<!-- breadcrumbs -->
+					<ol class="breadcrumb">
+						<%= render_breadcrumbs :tag => :li, :separator => " " %>
+					</ol><!-- /breadcrumbs -->
+
+				</div>
+			</section>
+			<!-- /PAGE HEADER -->
+			<!-- /PAGE HEADER -->
