@@ -1,34 +1,168 @@
-<p id="notice"><%= notice %></p>
+    <!-- -->
+      <section>
+        <div class="container">
 
-<p>
-  <strong>Name:</strong>
-  <%= @article.name %>
-</p>
+          <div class="row">
 
-<p>
-  <strong>User:</strong>
-  <%= @article.user_id %>
-</p>
+            <!-- LEFT -->
+            <div class="col-md-9 col-sm-9">
 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+              <h1 class="blog-post-title"><%= @article.name %></h1>
+              <ul class="blog-post-info list-inline">
+                <li>
+                    <i class="fa fa-clock-o"></i> 
+                    <span class="font-lato"><%= Russian::strftime(@article.created_at, "%d %B %Y") %></span>
+                </li>
 
-<p>
-  <strong>Image:</strong>
-  <%= @article.image %>
-</p>
+                <% if @article.comments.exists? %>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-comment-o"></i> 
+                    <span class="font-lato"><%= @article.comments.count %></span>
+                  </a>
+                </li>
+                <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @article.description %>
-</p>
+                <li>
+                  <i class="fa fa-folder-open-o"></i> 
+                    <span class="font-lato category"><%= @article.category.name %></span>
+                </li>
 
-<p>
-  <strong>Keywords:</strong>
-  <%= @article.keywords %>
-</p>
+                <% if @article.user.present? %>
+                <li>
+                    <i class="fa fa-user"></i> 
+                    <span class="font-lato"><%= @article.user.name %></span>
+                </li>
+                <% end %>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+                <% if current_user %>
+                  <% if current_user == @article.user || current_user.role == "admin" %>
+                  <li>
+                    <span class="font-lato">
+                      <%= link_to "Редактировать статью", edit_article_path(@article) %>
+                    </span>
+                  </li>
+                  <% end %>
+                <% end %>
+              </ul>
+
+
+              <!-- IMAGE -->
+              <figure class="margin-bottom-20">
+                <img class="img-responsive" src="assets/images/demo/content_slider/21-min.jpg" alt="img" />
+              </figure>
+              <!-- /IMAGE -->
+
+              <!-- article content -->
+              <p class="dropcap">Aliquam fringilla, sapien eget scelerisque placerat, lorem libero cursus lorem, sed sodales lorem libero eu sapien. Nunc mattis feugiat justo vel faucibus. Nulla consequat feugiat malesuada. Ut justo nulla, <strong>facilisis vel molestie id</strong>, dictum ut arcu. Nunc ipsum nulla, eleifend non blandit quis, luctus quis orci. Cras blandit turpis mattis nulla ultrices interdum. Mauris pretium pretium dictum. Nunc commodo, felis sed dictum bibendum, risus justo iaculis dui, nec euismod orci sem eget neque. Donec in metus metus, vitae eleifend lorem. Ut vestibulum gravida venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque suscipit tincidunt magna non mollis. Fusce tempus tincidunt nisi, in luctus elit pellentesque quis. Sed velit mi, ullamcorper ut tempor ut, mattis eu lacus. Morbi rhoncus aliquet tellus, id accumsan enim sollicitudin vitae.</p>
+              <p>Vivamus <a href="#">magna justo</a>, lacinia eget consectetur sed, convallis at tellus. Cras ultricies ligula sed magna dictum porta. Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.</p>
+              
+              <!-- BLOCKQUOTE -->
+              <blockquote>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <cite>Source Title</cite>
+              </blockquote>
+
+              <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.Quisque velit nisi, pretium ut lacinia in, elementum id enim. Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
+                <p>Proin eget tortor risus. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor accumsan tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <!-- /article content -->
+
+
+              <div class="divider divider-dotted"><!-- divider --></div>
+
+
+              <!-- TAGS -->
+              <a class="tag" href="#">
+                <span class="txt">RESPONSIVE</span>
+                <span class="num">12</span>
+              </a>
+              <a class="tag" href="#">
+                <span class="txt">CSS</span>
+                <span class="num">3</span>
+              </a>
+              <a class="tag" href="#">
+                <span class="txt">HTML</span>
+                <span class="num">1</span>
+              </a>
+              <a class="tag" href="#">
+                <span class="txt">JAVASCRIPT</span>
+                <span class="num">28</span>
+              </a>
+              <a class="tag" href="#">
+                <span class="txt">DESIGN</span>
+                <span class="num">6</span>
+              </a>
+              <a class="tag" href="#">
+                <span class="txt">DEVELOPMENT</span>
+                <span class="num">3</span>
+              </a>
+              <!-- /TAGS -->
+
+
+
+              <!-- SHARE POST -->
+              <div class="clearfix margin-top-30">
+
+                <span class="pull-left margin-top-6 bold hidden-xs">
+                  Share Post: 
+                </span>
+
+                <a href="#" class="social-icon social-icon-sm social-icon-transparent social-facebook pull-right" data-toggle="tooltip" data-placement="top" title="Facebook">
+                  <i class="icon-facebook"></i>
+                  <i class="icon-facebook"></i>
+                </a>
+
+                <a href="#" class="social-icon social-icon-sm social-icon-transparent social-twitter pull-right" data-toggle="tooltip" data-placement="top" title="Twitter">
+                  <i class="icon-twitter"></i>
+                  <i class="icon-twitter"></i>
+                </a>
+
+                <a href="#" class="social-icon social-icon-sm social-icon-transparent social-gplus pull-right" data-toggle="tooltip" data-placement="top" title="Google plus">
+                  <i class="icon-gplus"></i>
+                  <i class="icon-gplus"></i>
+                </a>
+
+                <a href="#" class="social-icon social-icon-sm social-icon-transparent social-linkedin pull-right" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                  <i class="icon-linkedin"></i>
+                  <i class="icon-linkedin"></i>
+                </a>
+
+                <a href="#" class="social-icon social-icon-sm social-icon-transparent social-pinterest pull-right" data-toggle="tooltip" data-placement="top" title="Pinterest">
+                  <i class="icon-pinterest"></i>
+                  <i class="icon-pinterest"></i>
+                </a>
+
+                <a href="#" class="social-icon social-icon-sm social-icon-transparent social-call pull-right" data-toggle="tooltip" data-placement="top" title="Email">
+                  <i class="icon-email3"></i>
+                  <i class="icon-email3"></i>
+                </a>
+
+              </div>
+              <!-- /SHARE POST -->
+
+
+              <div class="divider"><!-- divider --></div>
+
+              
+              <ul class="pager">
+                <li class="previous"><a class="noborder" href="#">&larr; Previous Post</a></li>
+                <li class="next"><a class="noborder" href="#">Next Post &rarr;</a></li>
+              </ul>
+
+
+              <div class="divider"><!-- divider --></div>
+
+              
+            <%= render "article_comments" %>
+
+
+            </div>
+
+
+            <!-- RIGHT -->
+            <%= render "/shared/column" %>
+
+          </div>
+
+        </div>
+      </section>

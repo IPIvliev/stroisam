@@ -1,0 +1,32 @@
+ <!-- Begin Content Section -->
+      <section class="mt40 mb40">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+                <%= 
+              grid(@users) do |g|
+                 g.column name: 'Имя' do |p|
+                   p.name
+                 end
+                 g.column name: 'Email' do |p|
+                   p.email
+                 end
+                 g.column name: 'Cтатей' do |p|
+                   p.articles.count
+                 end
+                 g.column name: 'Комментариев' do |p|
+                   p.comments.count
+                 end
+                g.column name: 'Показать' do |p|
+                  link_to('Показать', user_path(p))
+                end
+                g.column name: 'Удалить' do |p|
+                  link_to('Удалить', p, method: :delete, data: { confirm: 'Вы уверены?' })
+                end
+              end
+          %>
+                </div>
+              <%= render "/shared/column" %>
+          </div>
+      </section><!-- /content -->
+      <!-- End Content Section -->

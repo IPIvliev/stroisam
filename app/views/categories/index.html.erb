@@ -1,0 +1,29 @@
+ <!-- Begin Content Section -->
+      <section class="mt40 mb40">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+	            	<%= 
+					    grid(@categories) do |g|
+					       g.column name: 'Наименование' do |p|
+					         p.name
+					       end
+					       g.column name: 'Дата создания' do |p|
+					         p.created_at
+					       end
+						  g.column name: 'Количество статей', model: 'Article', attribute: 'name' do |category|
+						    category.articles.count
+						  end
+						  g.column name: 'Изменить' do |category|
+						    link_to('Изменить', edit_category_path(category))
+						  end
+						  g.column name: 'Удалить' do |category|
+						    link_to('Удалить', category, method: :delete, data: { confirm: 'Вы уверены?' })
+						  end
+					    end
+					%>
+                </div>
+              <%= render "/shared/column" %>
+          </div>
+      </section><!-- /content -->
+      <!-- End Content Section -->

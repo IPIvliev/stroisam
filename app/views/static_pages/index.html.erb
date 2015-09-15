@@ -39,7 +39,7 @@
 
 									<p><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 200, :omission => "...").html_safe %></p>
 
-									<%= link_to "<i class='fa fa-plus'></i><span>Read More</span>".html_safe, article_path(a), :class => "btn btn-reveal btn-default" %>
+									<%= link_to "<i class='fa fa-plus'></i><span>Читать полностью</span>".html_safe, article_path(a), :class => "btn btn-reveal btn-default" %>
 								</div>
 								<!-- /POST ITEM -->
 								<% end %>
