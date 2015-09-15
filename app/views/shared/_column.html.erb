@@ -25,26 +25,28 @@
 
 	<hr />
 
-	<!-- side navigation -->
-	<div class="side-nav margin-bottom-60 margin-top-30">
+    <aside class="content-box-bordered mt30-xs mb30">
+        <nav>
+            <ul class="sidebar-nav list-group no-margin" id="sidebar-nav">
+                <li class="list-group-item text-center"><span class="fa-2x text-main mb5">МЕНЮ</span></li>
+                <% Category.all.each do |category| %>
+                    <li class="list-group-item list-toggle">
+                        <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-<%= category.id %>"><%= category.name %></a>
+                        <ul id="collapse-<%= category.id %>" class="collapse">
+                            <% category.articles.where("view = ?", true).each do |article| %>
+                                <li>
+                                    <%= link_to "<i class='fa fa-angle-right'></i> #{article.name}".html_safe, article %>
+                                </li>
+                            <% end %>
+                        </ul>
+                <% end %>
+            </ul>
+        </nav>
+    </aside>
 
-		<div class="side-nav-head">
-			<button class="fa fa-bars"></button>
-			<h4>CATEGORIES</h4>
-		</div>
-		<ul class="list-group list-group-bordered list-group-noicon uppercase">
-			<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(12)</span> MEDIA</a></li>
-			<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(8)</span> MOVIES</a></li>
-			<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(32)</span> NEW</a></li>
-			<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(16)</span> TUTORIALS</a></li>
-			<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(2)</span> DEVELOPMENT</a></li>
-			<li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">(1)</span> UNCATEGORIZED</a></li>
 
-		</ul>
-		<!-- /side navigation -->
 
-	
-	</div>
+
 
 	<h3 class="hidden-xs size-16 margin-bottom-20">Последние статьи</h3>
 
@@ -136,18 +138,18 @@
 	<!-- SOCIAL ICONS -->
 	<div class="hidden-xs margin-top-30 margin-bottom-60">
 		<a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-			<i class="icon-facebook"></i>
-			<i class="icon-facebook"></i>
+			<i class="fa fa-facebook"></i>
+			<i class="fa fa-facebook"></i>
 		</a>
 
 		<a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-			<i class="icon-twitter"></i>
-			<i class="icon-twitter"></i>
+			<i class="fa fa-twitter"></i>
+			<i class="fa fa-twitter"></i>
 		</a>
 
 		<a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-			<i class="icon-gplus"></i>
-			<i class="icon-gplus"></i>
+			<i class="fa fa-google-plus"></i>
+			<i class="fa fa-google-plus"></i>
 		</a>
 
 	</div>

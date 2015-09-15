@@ -1,3 +1,46 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul.sidebar-nav > li > a {
+    padding: 7px 12px;
+}
+
+ul.sidebar-nav a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    }
+
+
+ul.sidebar-nav li {
+    list-style: outside none none;
+}
+
+.list-group-item {
+    font-size: 16px;
+}
+
+ul.sidebar-nav li.list-toggle::after {
+    content: ">";
+    font-family: Ionicons;
+    position: absolute;
+    font-size: 8px;
+    right: 15px;
+    top: 12px;
+    color: #CCC;
+}
+
+.list-group-item {
+    background: transparent none repeat scroll 0% 0%;
+    font-size: 16px;
+    border: 1px solid #DDD;
+}
+
+ul.sidebar-nav ul li {
+    padding: 5px 18px;
+}
+
+ul.sidebar-nav li {
+    list-style: outside none none;
+}

@@ -2,36 +2,36 @@
               <div id="comments" class="comments">
 
                 <h4 class="page-header margin-bottom-60 size-20">
-                  <span>3</span> COMMENTS
+                  <span><%= @article.comments.count %></span> <%= Russian.p(@article.comments.count, "КОММЕНТАРИЙ", "КОММЕНТАРИЯ", "КОММЕНТАРИЕВ") %>
                 </h4>
 
                 <div class="comment-list">
 
-                  <!-- First Comment -->
+                  <% @article.comments.order("created_at DESC").each do |comment| %>
                   <div class="row">
                     <div class="col-md-2 col-sm-2 hidden-xs">
                       <figure class="thumbnail">
                         <img class="img-responsive" src="assets/images/avatar2.jpg" />
-                        <figcaption class="text-center">user name</figcaption>
+                        <figcaption class="text-center"><%= comment.user.name %></figcaption>
                       </figure>
                     </div>
                     <div class="col-md-10 col-sm-10">
                       <div class="panel panel-default arrow left">
                         <div class="panel-body">
                           <header class="text-left">
-                            <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                            <span class="comment-date"><i class="fa fa-clock-o"></i> Dec 16, 2014</span>
+                            <div class="comment-user"><i class="fa fa-user"></i> <%= comment.user.name %></div>
+                            <span class="comment-date"><i class="fa fa-clock-o"></i> <%= Russian::strftime(@article.created_at, "%d %B %Y") %></span>
                           </header>
                           <div class="comment-post">
                             <p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                              <%= comment.text %>
                             </p>
                           </div>
-                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <% end %>
 
                 </div>
 

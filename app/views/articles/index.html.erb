@@ -1,37 +1,41 @@
-<p id="notice"><%= notice %></p>
+ <!-- Begin Content Section -->
+      <section class="mt40 mb40">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-9">
+                <%= 
+              grid(@articles) do |g|
+                 g.column name: 'Название' do |p|
+                  p.name
+                 end
+                 g.column name: 'Author' do |p|
+                   if p.user
+                    link_to p.user.name, user_path(p.user)
+                   else
+                    "Автор удалён"
+                   end
+                 end
+                 g.column name: 'Статус' do |p|
+                   if p.view == false
+                    link_to "<span class='fa fa-wrench fa-2x'</span>".html_safe, tog_article_path(p), :method => :put, :title => "Не обуликована"
+                   else
+                    link_to "<span class='fa fa-pencil fa-2x'</span>".html_safe, tog_article_path(p), :method => :put, :title => "Опубликована"
+                  end
 
-<h1>Listing Articles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>User</th>
-      <th>Text</th>
-      <th>Image</th>
-      <th>Description</th>
-      <th>Keywords</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.name %></td>
-        <td><%= article.user_id %></td>
-        <td><%= article.text %></td>
-        <td><%= article.image %></td>
-        <td><%= article.description %></td>
-        <td><%= article.keywords %></td>
-        <td><%= link_to 'Show', article %></td>
-        <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Article', new_article_path %>
+                 end
+                g.column name: 'Показать' do |article|
+                  link_to('Показать', article_path(article))
+                end
+                g.column name: 'Изменить' do |article|
+                  link_to('Изменить', edit_article_path(article))
+                end
+                g.column name: 'Удалить' do |article|
+                  link_to('Удалить', article, method: :delete, data: { confirm: 'Вы уверены?' })
+                end
+              end
+          %>
+                </div>
+              <%= render "/shared/column" %>
+          </div>
+      </section><!-- /content -->
+      <!-- End Content Section -->

@@ -1,16 +1,41 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :tog]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = initialize_grid(Article,
+        order:           'articles.created_at',
+        order_direction: 'desc',
+    )
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+
+    @comment = Comment.new
   end
+
+  def comment_create
+    @comment = current_user.comments.build(params[:comment].permit(:text, :user_id, :article_id))
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment.article, notice: 'Article was successfully created.' }
+        format.json { render :show, status: :created, location: @article }
+      else
+        format.html { render :new }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
+
+  def tog
+     @article.toggle!(:view)
+
+     redirect_to :back
+  end  
 
   # GET /articles/new
   def new

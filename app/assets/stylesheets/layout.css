@@ -52,12 +52,12 @@ html, body {
 	height:100%;
 }
 body {
-	color:#666;
+	color:#333;
 	background-color:#fff;
 	font-family:'Open Sans',Arial,Helvetica,sans-serif;
 	-webkit-font-smoothing: antialiased;
 
-	font-size:14px; line-height:1.5;
+	font-size:16px; line-height:1.5;
 	margin:0; padding:0;
 }
 /* example usage: index-onepage-youtube.html */
@@ -6007,8 +6007,8 @@ section.dark #portfolio h3 {
  **************************************************************** **/
 .blog-post-item {
 	display:block;
-	margin-bottom:80px;
-	padding-bottom:60px;
+	margin-bottom:20px;
+	padding-bottom:10px;
 	border-bottom:#eee 1px solid;
 	position:relative;
 }
@@ -6026,7 +6026,7 @@ h1.blog-post-title,
 ul.blog-post-info {
 	display:block;
 	border-bottom:#eaeaea 1px dotted;
-	padding-bottom:20px;
+	padding-bottom:5px;
 }
 section.dark ul.blog-post-info {
 	border-bottom-color:#444;
@@ -6050,7 +6050,7 @@ ul.blog-post-info li a:last-child:after {
 
 /* blog misc */
 .blog-post-item .flexslider {
-	margin-bottom:20px;
+	margin-bottom:10px;
 }
 h1.blog-post-title {
 	font-size:24px;

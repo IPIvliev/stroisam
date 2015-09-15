@@ -14,30 +14,26 @@
 								<div class="blog-post-item col-md-4 col-sm-4">
 
 									<!-- IMAGE -->
-									<figure class="margin-bottom-20">
+									<figure class="margin-bottom-10">
 										<%= image_tag a.image.thumb.url, :class => "img-responsive", :alt => a.name %>
 									</figure>
 
 									<h2><%= link_to a.name, article_path(a) %></h2>
 
-									<ul class="blog-post-info list-inline">
+									<ul class="blog-post-info list-inline" style="margin-bottom: 10px;">
 										<li>
-											<a href="#">
-												<i class="fa fa-clock-o"></i> 
-												<span class="font-lato"><%= Russian::strftime(a.created_at, "%d %B %Y") %></span>
-											</a>
+											<i class="fa fa-clock-o"></i> 
+											<span class="font-lato"><%= Russian::strftime(a.created_at, "%d %B %Y") %></span>
 										</li>
 										<% if a.comments.exists? %>
 											<li>
-												<a href="#">
-													<i class="fa fa-comment-o"></i> 
-													<span class="font-lato"><%= a.comments.count %></span>
-												</a>
+												<i class="fa fa-comment-o"></i> 
+												<span class="font-lato"><%= a.comments.count %></span>
 											</li>
 										<% end %>
 									</ul>
 
-									<p><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 200, :omission => "...").html_safe %></p>
+									<p style="text-align: justify;"><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 200, :omission => "...").html_safe %></p>
 
 									<%= link_to "<i class='fa fa-plus'></i><span>Читать полностью</span>".html_safe, article_path(a), :class => "btn btn-reveal btn-default" %>
 								</div>
