@@ -17,20 +17,20 @@
                  end
                  g.column name: 'Статус' do |p|
                    if p.view == false
-                    link_to "<span class='fa fa-wrench fa-2x'</span>".html_safe, tog_article_path(p), :method => :put, :title => "Не обуликована"
+                    link_to "<span class='fa fa-wrench fa-2x'</span>".html_safe, tog_category_article_path(p.category, p), :method => :put, :title => "Не обуликована"
                    else
-                    link_to "<span class='fa fa-pencil fa-2x'</span>".html_safe, tog_article_path(p), :method => :put, :title => "Опубликована"
+                    link_to "<span class='fa fa-pencil fa-2x'</span>".html_safe, tog_category_article_path(p.category, p), :method => :put, :title => "Опубликована"
                   end
 
                  end
                 g.column name: 'Показать' do |article|
-                  link_to('Показать', article_path(article))
+                  link_to('Показать', category_article_path(article.category, article))
                 end
                 g.column name: 'Изменить' do |article|
-                  link_to('Изменить', edit_article_path(article))
+                  link_to('Изменить', edit_category_article_path(article.category, article))
                 end
                 g.column name: 'Удалить' do |article|
-                  link_to('Удалить', article, method: :delete, data: { confirm: 'Вы уверены?' })
+                  link_to('Удалить', category_article_path(article.category, article), method: :delete, data: { confirm: 'Вы уверены?' })
                 end
               end
           %>

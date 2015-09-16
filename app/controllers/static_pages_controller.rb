@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def index
-  	@articles = Article.order("created_at DESC")
+  	@articles = Article.where("view = ?", true).order("created_at DESC").limit(6)
   end
 
   def contacts

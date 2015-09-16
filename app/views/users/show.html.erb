@@ -1,79 +1,83 @@
-<div class="container only-one">
-        
-	    	    <section class="content full-width main">
-	    	    <br>
-	      	      <h3><%= @user.name %><small><%= link_to "редактировать", edit_user_registration_path(current_user) if current_user == @user %></small></h3>
-	      	    
-	
-		<div class="profile-info">
-                    <div class="box square">
-						<%= image_tag @user.avatar.url %>
-					
-                                            </div>
-
-                    <div class="box square">
-                        <div class="posted">Статей<big><%= @user.articles.count %></big></div>
-                        <div class="subscribed">Комментариев<big><%= @user.comments.count %></big></div>
-                        <!--
-        		       		<div class="printed" rel="/monthly-rating.php">Рейтинг<big>0</big></div>
-		                    <div class="uploaded">Загруженных<br>схем<big>0</big></div> -->
-                    </div>
-
-                    <div class="box">
-						                        <div class="shareexp follow">
-                            <h2>Делитесь своим опытом:</h2>
-                            <%= link_to "Написать статью", new_article_path, :class => "btn btn-success" %>
-                            <!-- <%= link_to "Добавить схему", "#", :class => "btn btn-info" %> -->
-
-                            <!-- <label>
-                                <a href="/subscribe.php" style="color:#005b7f;margin-left: 30px;">Управление рассылками &raquo;</a>
-                            </label>
-                        -->
+        <!-- -->
+            <section>
+                <div class="container">
+                    
+                    <!-- LEFT -->
+                    <div class="col-lg-3 col-md-3 col-sm-4">
+                    
+                        <div class="thumbnail text-center">
+                            <%= image_tag @user.avatar.url %>
+                            <h2 class="size-18 margin-top-10 margin-bottom-0"><%= @user.name %></h2>
                         </div>
-                        <% if current_user == @user %>
-                            <div class="printing">
-			                    <h2>Настройки:</h2>
-				 			    <%= link_to "Изменить профайл", edit_user_registration_path(current_user) %>	                          
+
+                        <!-- SIDE NAV -->
+                        <ul class="side-nav list-group margin-bottom-60" id="sidebar-nav">
+                            <li class="list-group-item"><%= link_to "<i class='fa fa-eye'></i> Профайл".html_safe, user_path(@user) %></li>
+                            <% if current_user == @user || current_user && current_user.role == "admin" %>
+                                <li class="list-group-item active"><%= link_to "<i class='fa fa-tasks'></i> Изменить профайл".html_safe, edit_user_registration_path(@user) %></li>
+                            <% end %>
+                        </ul>
+                        <!-- /SIDE NAV -->
+
+
+                        <!-- info -->
+                        <div class="box-light margin-bottom-30"><!-- .box-light OR .box-light -->
+                            <div class="row margin-bottom-20">
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-center bold">
+                                    <h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway"><%= @user.articles.count %></h2>
+                                    <h3 class="size-11 margin-top-0 margin-bottom-10 text-info">СТАТЬИ</h3>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-center bold">
+                                    <h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway"><%= @user.comments.count %></h2>
+                                    <h3 class="size-11 margin-top-0 margin-bottom-10 text-info">КОММЕНТАРИИ</h3>
+                                </div>
+
                             </div>
-                        <% end %>
+                            <!-- /info -->
+                        
+                        </div>
+
                     </div>
+
+
+                    <!-- RIGHT -->
+                    <div class="col-lg-9 col-md-9 col-sm-8">
+
+                        <div class="box-light"><!-- .box-light OR .box-dark -->
+
+                            <!-- PROJECT LIS -->
+                            <div class="row">
+
+                                <% @user.articles.order("created_at DESC").each do |article| %>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="box-inner margin-top-30">
+                                            <%= link_to ( image_tag article.image.thumb.url, :class => "img-responsive", :alt => article.name ), category_article_path(article.category, article) %>
+
+                                            <h3 class="text-left margin-top-20 bold size-16 elipsis"><%= link_to article.name, category_article_path(article.category, article) %></h3>
+                                            <p class="text-left"><%= truncate( raw( sanitize(article.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 100, :omission => "...").html_safe %></p>
+                                            <ul class="text-left size-12 list-inline list-separator nomargin">
+                                                <li>
+                                                    <i class="fa fa-calendar"></i> 
+                                                    <%= Russian::strftime(article.created_at, "%d %B %Y") %>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-comments"></i> 
+                                                    <%= article.comments.count %>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                <% end %>
+
+                            </div>
+                            <!-- /PROJECTS LIS -->
+
+                        </div>
+
+                    </div>
+                    
                 </div>
-                <hr class="mt15 mb15">
-<div class="row">
-
-	<div class="col-sm-8">
-		<h3>Статьи пользователя</h3>
-						    		<% @articles.each do |article| %>
-					<div class="blog-post mb40">
-                        <%= image_tag article.image.url, :class => "img-responsive full-width" if article.image? %> 
-                        <div class="blog-post-holder">
-                            <ul class="list-inline posted-info">
-                                <li><strong>Автор:</strong> <%= link_to article.user.name, article.user if article.user.present? %></li>
-                                <li><strong>Категория:</strong> <%= article.category.name if article.category %></li>
-                                <li><strong>Создано:</strong> <%= Russian::strftime(article.created_at, "%d %B %Y") %></li>
-                                <% if current_user == article.user %>
-                          			<li><%= link_to "Редактировать статью", edit_article_path(article) %></li>
-                        		<% end %>
-                            </ul>
-                            <hr align="left" class="mt15 mb10" style="width:50px;">
-                            <h1><%= link_to article.name, article %></h1>
-                            <p>
-                            	<%= truncate( raw( sanitize(article.text, :tags => %w(table tr td strong), :attributes => %w(id class style) ) ), :length => 200, :omission => "...") %></p>
-                            <%= link_to "Читать полностью ::.", article, :class => "btn btn-rw btn-primary mt10" %>
-                        </div>                
-                    </div>
-		                    <% end %>
-				<nav class="text-center">
-					<%= paginate @articles %>
-				</nav>
-	</div>
-	
-
-		<%= render "/shared/column" %>
-
-</div>
-                <div class="clear"><!-- --></div>
-                
-<br><br>
-                </section>
-            </div>
+            </section>
+            <!-- / -->

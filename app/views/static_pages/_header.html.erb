@@ -35,9 +35,7 @@
 									<% if current_user %>
 
 										<li style="background-color: #bbb">
-											<a href="/users/sign_up" style="color: #fff; font-weight: bold;">
-												Профайл
-											</a>
+											<%= link_to "Профайл", user_path(current_user), :style => "color: #fff; font-weight: bold;" %>
 										</li>
 										<li style="background-color: orange">
 											<%= link_to "Выход", destroy_user_session_path, :method => :delete, :rel => "nofollow", :style => "color: #fff; font-weight: bold;" %>
@@ -49,9 +47,7 @@
 											</a>
 										</li>
 										<li style="background-color: #8AB933">
-											<a href="/users/sign_up" style="color: #fff; font-weight: bold;">
-												Регистрация
-											</a>
+											<%= link_to "Регистрация", new_user_registration_path, :style => "color: #fff; font-weight: bold;" %>
 										</li>
 									<% end %>
 								</ul>
@@ -66,8 +62,16 @@
 			<section class="page-header dark page-header-xs" style="background-image:url('/images/imgpattern2.jpg')">
 				<div class="container">
 
-					<h1 style="color: #000; background-color:#fff; width: 410px; font-weight: bold; padding-left: 10px">Строительные коммуникации</h1>
-					<span class="font-lato size-18 weight-300 hidden-xs" style="color: #000; background-color:#fff; width: 150px; padding: 10px">Отопление, водоснабжение, канализация</span>
+					<% if @article.blank? %>
+						<h1 style="color: #000; background-color:#fff; width: 410px; font-weight: bold; padding-left: 10px">Строительные коммуникации</h1>
+						<strong style="color: #000; background-color:#fff; width: 150px; padding: 10px">Отопление, водоснабжение, канализация</strong>
+					<% elsif @article.name.present? %>
+						<h2 style="color: #000; background-color:#fff; width: 410px; font-weight: bold; padding-left: 10px; margin-bottom: 0"><%= @article.category.name %></h2>
+						<strong style="color: #000; background-color:#fff; width: 150px; padding: 10px"><%= @article.category.description %></strong>
+					<% else %>
+						<h1 style="color: #000; background-color:#fff; width: 410px; font-weight: bold; padding-left: 10px">Строительные коммуникации</h1>
+						<strong style="color: #000; background-color:#fff; width: 150px; padding: 10px">Отопление, водоснабжение, канализация</strong>					
+					<% end %>						
 
 					<!-- breadcrumbs -->
 					<ol class="breadcrumb">

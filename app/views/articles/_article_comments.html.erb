@@ -11,8 +11,8 @@
                   <div class="row">
                     <div class="col-md-2 col-sm-2 hidden-xs">
                       <figure class="thumbnail">
-                        <img class="img-responsive" src="assets/images/avatar2.jpg" />
-                        <figcaption class="text-center"><%= comment.user.name %></figcaption>
+                        <%= image_tag comment.user.avatar.url, :class => "img-responsive" %>
+                        <figcaption class="text-center"><%= link_to comment.user.name, user_path(comment.user) %></figcaption>
                       </figure>
                     </div>
                     <div class="col-md-10 col-sm-10">

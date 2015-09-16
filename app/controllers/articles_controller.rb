@@ -4,16 +4,26 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = initialize_grid(Article,
+    if params[:tag]
+      @articles = initialize_grid(Article.all.tagged_with(params[:tag]),
         order:           'articles.created_at',
         order_direction: 'desc',
-    )
+      )
+
+    else
+      @articles = initialize_grid(Article,
+        order:           'articles.created_at',
+        order_direction: 'desc',
+      )
+    end
+    
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-
+    add_breadcrumb @article.name, category_article_path(@article.category, @article)
+    
     @comment = Comment.new
   end
 
@@ -22,7 +32,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment.article, notice: 'Article was successfully created.' }
+        format.html { redirect_to category_article_path(@comment.article.category, @comment.article), notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -53,7 +63,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to category_article_path(@article.category, @article), notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -67,7 +77,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to category_article_path(@article.category, @article), notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -94,6 +104,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:name, :description, :keywords, :text, :category_id, :user_id, :image, :image_cache, :remove_image, :view)
+      params.require(:article).permit(:name, :description, :keywords, :text, :category_id, :user_id, :image, :image_cache, :remove_image, :view, :tag_list)
     end
 end

@@ -10,36 +10,36 @@
               <h1 class="blog-post-title"><%= @article.name %></h1>
               <ul class="blog-post-info list-inline">
                 <li>
-                    <i class="fa fa-clock-o"></i> 
+                    <i class="fa fa-clock-o"></i>
                     <span class="font-lato"><%= Russian::strftime(@article.created_at, "%d %B %Y") %></span>
                 </li>
 
                 <% if @article.comments.exists? %>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-comment-o"></i> 
-                    <span class="font-lato"><%= @article.comments.count %></span>
-                  </a>
-                </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-comment-o"></i>
+                      <span class="font-lato"><%= @article.comments.count %></span>
+                    </a>
+                  </li>
                 <% end %>
 
                 <li>
-                  <i class="fa fa-folder-open-o"></i> 
+                  <i class="fa fa-folder-open-o"></i>
                     <span class="font-lato category"><%= @article.category.name %></span>
                 </li>
 
                 <% if @article.user.present? %>
-                <li>
-                    <i class="fa fa-user"></i> 
-                    <span class="font-lato"><%= @article.user.name %></span>
-                </li>
+                  <li>
+                      <i class="fa fa-user"></i>
+                      <span class="font-lato"><%= link_to @article.user.name, user_path(@article.user) %></span>
+                  </li>
                 <% end %>
 
                 <% if current_user %>
                   <% if current_user == @article.user || current_user.role == "admin" %>
                   <li>
                     <span class="font-lato">
-                      <%= link_to "Редактировать статью", edit_article_path(@article) %>
+                      <%= link_to "Редактировать статью", edit_category_article_path(@article.category, @article) %>
                     </span>
                   </li>
                   <% end %>
@@ -58,35 +58,7 @@
 
               <div class="divider divider-dotted"><!-- divider --></div>
 
-
-              <!-- TAGS -->
-              <a class="tag" href="#">
-                <span class="txt">RESPONSIVE</span>
-                <span class="num">12</span>
-              </a>
-              <a class="tag" href="#">
-                <span class="txt">CSS</span>
-                <span class="num">3</span>
-              </a>
-              <a class="tag" href="#">
-                <span class="txt">HTML</span>
-                <span class="num">1</span>
-              </a>
-              <a class="tag" href="#">
-                <span class="txt">JAVASCRIPT</span>
-                <span class="num">28</span>
-              </a>
-              <a class="tag" href="#">
-                <span class="txt">DESIGN</span>
-                <span class="num">6</span>
-              </a>
-              <a class="tag" href="#">
-                <span class="txt">DEVELOPMENT</span>
-                <span class="num">3</span>
-              </a>
-              <!-- /TAGS -->
-
-
+              <%= raw @article.tag_list.map { |t| link_to "<span class='txt'>#{t}</span><span class='num'>#{Article.tagged_with(t).count}</span>".html_safe, tag_path(t), :class => "tag" }.join(' ') %>
 
               <!-- SHARE POST -->
               <div class="clearfix margin-top-30">
@@ -112,19 +84,6 @@
 
               </div>
               <!-- /SHARE POST -->
-
-
-              <div class="divider"><!-- divider --></div>
-
-              
-              <ul class="pager">
-                <li class="previous">
-                  <%= link_to "Предыдущая статья", @article.previous, :class => "noborder" %>
-                </li>
-                <li class="next">
-                  <%= link_to "Следующая статья", @article.next, :class => "noborder" %>
-                </li>
-              </ul>
 
 
               <div class="divider"><!-- divider --></div>

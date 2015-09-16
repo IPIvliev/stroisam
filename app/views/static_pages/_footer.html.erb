@@ -6,29 +6,31 @@
 			<!-- col #1 -->
 			<div class="col-md-8">
 
-				<h3 class="letter-spacing-1">WHY US?</h3>
+				<h3 class="letter-spacing-1">О проекте</h3>
 
 				<!-- Small Description -->
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet hendrerit volutpat. Sed in nunc nec ligula consectetur mollis in vel justo. Vestibulum ante ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet hendrerit volutpat.
+					Наш проект создан для того, чтобы помочь вам в вопросах строительства. На нашем портале вы найдёте материалы по строительству как частных домов, так и промышленных зданий и сооружений. Большое количество материалов посвящено строительным коммуникациям. Вот кратикий список тем, по которым у нас имеются статьи:
+					<% Category.all.each do |c| %>
+					 <%= c.name %>,
+					<% end %>
 				</p>
-				<h2>(800) 123-4567</h2>
 			</div>
 			<!-- /col #1 -->
 
 			<!-- col #2 -->
 			<div class="col-md-4">
-				<h3 class="letter-spacing-1">KEEP IN TOUCH</h3>
+				<h3 class="letter-spacing-1">Подписка на новости</h3>
 
 				<!-- Newsletter Form -->
-				<p>Subscribe to Our Newsletter to get Important News & Offers</p>
+				<p>Вы можете подписаться на наши новые статьи</p>
 
 				<form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-						<input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
+						<input type="email" id="email" name="email" class="form-control required" placeholder="Введите ваш Email">
 						<span class="input-group-btn">
-							<button class="btn btn-success" type="submit">Subscribe</button>
+							<button class="btn btn-success" type="submit">Подписаться</button>
 						</span>
 					</div>
 				</form>
@@ -43,12 +45,14 @@
 
 	<div class="copyright">
 		<div class="container">
+			<!--
 			<ul class="pull-right nomargin list-inline mobile-block">
 				<li><a href="#">Terms &amp; Conditions</a></li>
 				<li>&bull;</li>
 				<li><a href="#">Privacy</a></li>
 			</ul>
-			&copy; All Rights Reserved, Company LTD
+		-->
+			&copy; При копировании информации ссылка на сайт обязательна.
 		</div>
 	</div>
 

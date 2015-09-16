@@ -1,5 +1,5 @@
 <div class="panel panel-primary">
-    <div class="panel-heading">Написать новую статью</div>
+    <div class="panel-heading">Написать статью</div>
     <div class="panel-body">
 <%= form_for(@article) do |f| %>
   <% if @article.errors.any? %>
@@ -38,7 +38,6 @@
                     <input type="text" class="form-control" placeholder="обложка не выбрана" readonly="" />
                     <span class="button">Выбрать файл</span>
                   </div>
-                  
               <% end %>  
             </div>          
             <div class="form-group">

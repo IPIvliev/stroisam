@@ -28,6 +28,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'meta-tags'
 gem "breadcrumbs_on_rails"
 gem 'sitemap_generator'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 # Cron
 gem 'whenever', :require => false
