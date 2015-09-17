@@ -1,0 +1,57 @@
+<section>
+	<div class="container">
+
+		<div class="row">
+
+			<!-- LEFT -->
+			<div class="col-md-9 col-sm-9">
+
+				<% @articles.each do |article| %>
+				<!-- POST ITEM -->
+					<div class="blog-post-item"><!-- .blog-post-item-inverse = image right side [left on RTL] -->
+
+						<!-- IMAGE -->
+						<figure class="blog-item-small-image margin-bottom-20">
+							<%= link_to ( image_tag article.image.thumb.url, :class => "img-responsive", :alt => article.name ), category_article_path(article.category, article) %>
+						</figure>
+
+						<div class="blog-item-small-content">
+
+							<h2><%= link_to article.name, category_article_path(article.category, article) %></h2>
+
+							<ul class="blog-post-info list-inline">
+								<li>
+									<i class="fa fa-clock-o"></i> 
+									<span class="font-lato"><%= Russian::strftime(article.created_at, "%d %B %Y") %></span>
+								</li>
+								<li>
+									<% if article.comments.exists? %>
+										<i class="fa fa-comment-o"></i> 
+						
+										<span class="font-lato"><%= article.comments.count %> <%= Russian.p(article.comments.count, "комментарий", "комментария", "комментариев") %></span>
+									<% end %>
+								</li>
+							</ul>
+
+							<p><%= truncate( raw( sanitize(article.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 250, :omission => "...").html_safe %></p>
+
+							<%= link_to "<i class='fa fa-plus'></i><span>Читать полностью</span>".html_safe, category_article_path(article.category, article), :class => "btn btn-reveal btn-default" %>
+
+						</div>
+
+					</div>
+				<!-- /POST ITEM -->
+				<% end %>
+
+				<%= paginate @articles %>
+
+			</div>
+
+			<!-- RIGHT -->
+			<%= render "/shared/column" %>
+
+		</div>
+
+	</div>
+</section>
+<!-- / -->

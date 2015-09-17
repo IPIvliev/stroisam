@@ -4,19 +4,19 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    if params[:tag]
-      @articles = initialize_grid(Article.all.tagged_with(params[:tag]),
-        order:           'articles.created_at',
-        order_direction: 'desc',
-      )
-
-    else
       @articles = initialize_grid(Article,
         order:           'articles.created_at',
         order_direction: 'desc',
       )
+  end
+
+  def tag
+    @articles = if params[:tag]
+      tag = ActsAsTaggableOn::Tag.find_by_slug(params[:tag])
+      Article.where("view = ?", true).order("created_at DESC").friendly.tagged_with(tag).page(params[:page]).per(5)
+    else
+      Article.where("view = ?", true).order("created_at DESC").page(params[:page]).per(10)
     end
-    
   end
 
   # GET /articles/1
@@ -104,6 +104,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:name, :description, :keywords, :text, :category_id, :user_id, :image, :image_cache, :remove_image, :view, :tag_list)
+      params.require(:article).permit(:name, :description, :keywords, :text, :category_id, :user_id, :image, :image_cache, :remove_image, :view, :tag_list, :slug)
     end
 end

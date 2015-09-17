@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   get 'articles' => 'articles#index', as: :articles
   match 'articles/new' => 'articles#new', via: [:get, :post], as: :new_article
-  get 'tag/:tag', to: 'articles#index', as: :tag
 
+  match 'tag/:tag', to: 'articles#tag', via: [:get, :post], as: :tag
+  get 'tag/', to: 'articles#tag'
 
   get 'categories' => 'categories#index', as: :categories
   match 'categories/new' => 'categories#new', via: [:get, :post], as: :new_category

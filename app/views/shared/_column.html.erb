@@ -7,30 +7,30 @@
     	        <div class="btn btn-success" style="font-size:18px; font-weight: bold"><%= link_to "Написать статью", new_article_path, :style => "color: #fff; text-decoration: none" %></div>
     	    </div>
     	</div>
+    	<hr />
     <% elsif current_user && current_user.role == "admin" %>
         <%= render "/users/admin_menu" %>
+        <hr />
 	<% end %>
 
+	
 
-	<!-- INLINE SEARCH -->
-	<div class="inline-search clearfix margin-bottom-30">
-		<form action="" method="get" class="widget_search">
-			<input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
-			<button type="submit">
-				<i class="fa fa-search"></i>
-			</button>
-		</form>
+	<!-- TAGS -->
+	<h3 class="hidden-xs size-16 margin-bottom-20">Темы статей</h3>
+	<div class="hidden-xs margin-bottom-20">
+
+		<% ActsAsTaggableOn::Tag.most_used(7).each do |tag| %>
+			<%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag" %>
+		<% end %>
+
 	</div>
-	<!-- /INLINE SEARCH -->
-
-	<hr />
 
     <aside class="content-box-bordered mt30-xs mb30">
         <nav>
             <ul class="sidebar-nav list-group no-margin" id="sidebar-nav">
                 <li class="list-group-item text-center"><span class="fa-2x text-main mb5">МЕНЮ</span></li>
                 <% Category.all.each do |category| %>
-                    <li class="list-group-item list-toggle">
+                    <li class="list-group-item list-toggle" style="background-color: #ddd;">
                         <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-<%= category.id %>"><%= "#{category.name}  (#{category.articles.where("view = ?", true).count} #{Russian.p(category.articles.where("view = ?", true).count, 'статья', 'статьи', 'статей')})" %></a>
                         <ul id="collapse-<%= category.id %>" class="collapse">
                             <% category.articles.where("view = ?", true).each do |article| %>
@@ -44,16 +44,12 @@
         </nav>
     </aside>
 
-
-
-
-
-	<h3 class="hidden-xs size-16 margin-bottom-20">Последние статьи</h3>
+	<h3 class="hidden-xs size-16 margin-bottom-10 margin-top-30">Последние статьи</h3>
 
 	<!-- JUSTIFIED TAB -->
-	<div class="tabs nomargin-top hidden-xs margin-bottom-20">
+	<div class="tabs nomargin-top hidden-xs margin-bottom-10">
 
-		<div class="tab-content margin-bottom-20 margin-top-30">
+		<div class="tab-content margin-bottom-10 margin-top-10">
 
 			<!-- POPULAR -->
 			<div id="tab_1" class="tab-pane active">
@@ -79,17 +75,6 @@
 
 	</div>
 	<!-- JUSTIFIED TAB -->
-
-
-	<!-- TAGS -->
-	<h3 class="hidden-xs size-16 margin-bottom-20">Темы статей</h3>
-	<div class="hidden-xs margin-bottom-60">
-
-		<% ActsAsTaggableOn::Tag.most_used(7).each do |tag| %>
-			<%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.tagged_with(tag).count}</span>".html_safe, tag_path(tag.name), :class => "tag" %>
-		<% end %>
-
-	</div>
 
 	<hr />
 
