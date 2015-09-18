@@ -3,48 +3,37 @@
 
 					<div class="row">
 
-						<!-- LEFT -->
-<!-- RIGHT -->
 						<div class="col-md-9 col-sm-9">
 
 							<div class="row">
 
 								<% @articles.each do |a| %>
-								<!-- POST ITEM -->
-								<div class="blog-post-item col-md-4">
-
-									<!-- IMAGE -->
-									<figure class="margin-bottom-10">
-										<%= image_tag a.image.thumb.url, :class => "img-responsive", :alt => a.name %>
-									</figure>
-
-									<h2><%= link_to (truncate(a.name, :length => 30, :omission => "...")).html_safe, category_article_path(a.category, a) %></h2>
-
-									<ul class="blog-post-info list-inline" style="margin-bottom: 10px;">
-										<li>
-											<i class="fa fa-clock-o"></i> 
-											<span class="font-lato"><%= Russian::strftime(a.created_at, "%d %B %Y") %></span>
-										</li>
-										<% if a.comments.exists? %>
+									<div class="blog-post-item col-md-4">
+										<figure class="margin-bottom-10">
+											<%= image_tag a.image.thumb.url, :class => "img-responsive", :alt => a.name %>
+										</figure>
+										<h2><%= link_to (truncate(a.name, :length => 30, :omission => "...")).html_safe, category_article_path(a.category, a) %></h2>
+										<ul class="blog-post-info list-inline" style="margin-bottom: 10px;">
 											<li>
-												<i class="fa fa-comment-o"></i> 
-												<span class="font-lato"><%= a.comments.count %></span>
+												<i class="fa fa-clock-o"></i> 
+												<span class="font-lato"><%= Russian::strftime(a.created_at, "%d %B %Y") %></span>
 											</li>
-										<% end %>
-									</ul>
-
-									<p style="text-align: justify;"><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 150, :omission => "...").html_safe %></p>
-
-									<%= link_to "<i class='fa fa-plus'></i><span>Читать полностью</span>".html_safe, category_article_path(a.category, a), :class => "btn btn-reveal btn-default" %>
-								</div>
-								<!-- /POST ITEM -->
+											<% if a.comments.exists? %>
+												<li>
+													<i class="fa fa-comment-o"></i> 
+													<span class="font-lato"><%= a.comments.count %></span>
+												</li>
+											<% end %>
+										</ul>
+										<p style="text-align: justify;"><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 150, :omission => "...").html_safe %></p>
+										<%= link_to "<i class='fa fa-plus'></i><span>Читать полностью</span>".html_safe, category_article_path(a.category, a), :class => "btn btn-reveal btn-default", :rel => "nofollow" %>
+									</div>
 								<% end %>
-
 							</div>
 
 							<div class="row">
 								<div class="heading-title heading-line-single">
-									<h1>Строй сам: <span>строительные коммуникации</span></h1>
+									<span class="h1">Строй сам: <span style="color: #8AB933;">строительные коммуникации</span></span>
 								</div>
 								<p>Мы рады приветствовать Вас на страницах широкоформатной энциклопедии по строительным коммуникациям! С первых минут нашего знакомства хотим подчеркнуть: портал aqua-rmnt.com наполнен разносторонней информацией, поэтому полезные факты, сведения найдут для себя и профессиональные мастера, и люди, желающие обустроить жилище собственными силами.</p>
 
@@ -59,13 +48,11 @@
 
 							</div>
 
-
 						</div>
 
 						<%= render "/shared/column" %>
 
 					</div>
-
 
 				</div>
 			</section>

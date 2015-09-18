@@ -1,74 +1,74 @@
-    <!-- -->
+<link rel="canonical" href="<%= "#{request.base_url}/#{@article.category.slug}/#{@article.slug}" %>"/>
+
       <section>
         <div class="container">
 
           <div class="row">
 
-            <!-- LEFT -->
             <div class="col-md-9 col-sm-9">
-
-              <h1 class="blog-post-title"><%= @article.name %></h1>
-              <ul class="blog-post-info list-inline">
-                <li>
-                    <i class="fa fa-clock-o"></i>
-                    <span class="font-lato"><%= Russian::strftime(@article.created_at, "%d %B %Y") %></span>
-                </li>
-
-                <% if @article.comments.exists? %>
+              <div itemscope itemtype="http://schema.org/Article">
+                <meta itemprop="genre" content="Статьи портала Строй сам">
+                <h1 class="blog-post-title" itemprop="headline"><%= @article.name %></h1>
+                <ul class="blog-post-info list-inline">
+                  <meta itemprop="dateCreated" content="<%= @article.created_at.to_time.iso8601 %>">
+                  <meta itemprop="datePublished" content="<%= @article.created_at.to_time.iso8601 %>">
+                  
                   <li>
-                      <i class="fa fa-comment-o"></i>
-                      <span class="font-lato"><%= @article.comments.count %></span>
+                      <i class="fa fa-clock-o"></i>
+                      <span class="font-lato"><%= Russian::strftime(@article.created_at, "%d %B %Y") %></span>
                   </li>
-                <% end %>
 
-                <li>
-                  <i class="fa fa-folder-open-o"></i>
-                    <span class="font-lato category"><%= @article.category.name %></span>
-                </li>
-
-                <% if @article.user.present? %>
-                  <li>
-                      <i class="fa fa-user"></i>
-                      <span class="font-lato"><%= link_to @article.user.name, user_path(@article.user) %></span>
-                  </li>
-                <% end %>
-
-                <% if current_user %>
-                  <% if current_user == @article.user || current_user.role == "admin" %>
-                  <li>
-                    <span class="font-lato">
-                      <%= link_to "Редактировать статью", edit_category_article_path(@article.category, @article) %>
-                    </span>
-                  </li>
+                  <% if @article.comments.exists? %>
+                    <li>
+                        <i class="fa fa-comment-o"></i>
+                        <span class="font-lato"><%= @article.comments.count %></span>
+                    </li>
                   <% end %>
+
+                  <li>
+                    <i class="fa fa-folder-open-o"></i>
+                      <span class="font-lato category" itemprop="articleSection"><%= @article.category.name %></span>
+                  </li>
+
+                  <% if @article.user.present? %>
+                    <li>
+                        <i class="fa fa-user"></i>
+                        <span class="font-lato"><%= link_to @article.user.name, user_path(@article.user), :rel => "nofollow", :itemprop => "author" %></span>
+                    </li>
+                  <% end %>
+
+                  <% if current_user %>
+                    <% if current_user == @article.user || current_user.role == "admin" %>
+                    <li>
+                      <span class="font-lato">
+                        <%= link_to "Редактировать статью", edit_category_article_path(@article.category, @article) %>
+                      </span>
+                    </li>
+                    <% end %>
+                  <% end %>
+                </ul>
+
+                <figure class="margin-bottom-20">
+                  <%= image_tag @article.image.url, :class => "img-responsive", :alt => @article.name, :itemprop => "image" %>
+                </figure>
+
+                <div itemprop="articleBody"><%= @article.text.html_safe %></div>
+
+                <div class="divider divider-dotted"><!-- divider --></div>
+
+                <% @article.tag_list.each do |tag| %>
+                  <% tag = ActsAsTaggableOn::Tag.find_by_name(tag) %>
+                  <%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag" %>
                 <% end %>
-              </ul>
-
-
-              <!-- IMAGE -->
-              <figure class="margin-bottom-20">
-                <%= image_tag @article.image.url, :class => "img-responsive", :alt => @article.name %>
-              </figure>
-              <!-- /IMAGE -->
-
-              <!-- article content -->
-              <p class="dropcap"><%= @article.text.html_safe %></p>
-
-              <div class="divider divider-dotted"><!-- divider --></div>
-
-              <% @article.tag_list.each do |tag| %>
-                <% tag = ActsAsTaggableOn::Tag.find_by_name(tag) %>
-                <%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag" %>
-              <% end %>
-
+              </div>
               <div class="clearfix margin-top-30 row">
-                <h3 class="hidden-xs size-16">Похожие статьи</h3>
+                <div class="hidden-xs size-16 h3">Похожие статьи</div>
                 <% Article.where("view = ? AND category_id = ? AND id != ?", true, @article.category.id, @article.id).order("RAND()").limit(3).each do |article| %>
                   <div class="col-md-4 col-sm-4">
                       <div class="box-inner">
-                          <%= link_to ( image_tag article.image.thumb.url, :class => "img-responsive", :alt => article.name ), category_article_path(article.category, article) %>
+                          <%= link_to ( image_tag article.image.thumb.url, :class => "img-responsive", :alt => article.name ), category_article_path(article.category, article), :rel => "nofollow" %>
 
-                          <h3 class="text-left margin-top-20 bold size-16 elipsis"><%= link_to article.name, category_article_path(article.category, article) %></h3>
+                          <div class="text-left margin-top-20 bold size-16 elipsis h3"><%= link_to article.name, category_article_path(article.category, article) %></div>
                           <p class="text-left"><%= truncate( raw( sanitize(article.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 100, :omission => "...").html_safe %></p>
                           <ul class="text-left size-12 list-inline list-separator nomargin">
                               <li>
@@ -86,16 +86,12 @@
                 <% end %>
               </div>
 
-              <div class="divider"><!-- divider --></div>
-
+              <div class="divider"></div>
               
             <%= render "article_comments" %>
 
-
             </div>
 
-
-            <!-- RIGHT -->
             <%= render "/shared/column" %>
 
           </div>

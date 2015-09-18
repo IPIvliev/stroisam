@@ -25,6 +25,10 @@ class ArticlesController < ApplicationController
     add_breadcrumb @article.name, category_article_path(@article.category, @article)
     
     @comment = Comment.new
+
+    set_meta_tags :title => @article.name,
+              :description => @article.description,
+              :keywords => @article.keywords    
   end
 
   def comment_create

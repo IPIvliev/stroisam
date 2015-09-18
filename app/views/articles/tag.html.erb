@@ -3,14 +3,11 @@
 
 		<div class="row">
 
-			<!-- LEFT -->
 			<div class="col-md-9 col-sm-9">
 
 				<% @articles.each do |article| %>
-				<!-- POST ITEM -->
 					<div class="blog-post-item"><!-- .blog-post-item-inverse = image right side [left on RTL] -->
 
-						<!-- IMAGE -->
 						<figure class="blog-item-small-image margin-bottom-20">
 							<%= link_to ( image_tag article.image.thumb.url, :class => "img-responsive", :alt => article.name ), category_article_path(article.category, article) %>
 						</figure>
@@ -40,18 +37,15 @@
 						</div>
 
 					</div>
-				<!-- /POST ITEM -->
 				<% end %>
 
 				<%= paginate @articles %>
 
 			</div>
 
-			<!-- RIGHT -->
 			<%= render "/shared/column" %>
 
 		</div>
 
 	</div>
 </section>
-<!-- / -->

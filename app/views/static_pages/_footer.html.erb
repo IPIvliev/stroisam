@@ -3,12 +3,10 @@
 
 		<div class="row">
 
-			<!-- col #1 -->
 			<div class="col-md-8">
 
-				<h3 class="letter-spacing-1">О проекте</h3>
+				<span class="letter-spacing-1" style="color: rgba(255, 255, 255, 0.8); font-weight: 600; font-size: 18px;">О проекте</span>
 
-				<!-- Small Description -->
 				<p>
 					Наш проект создан для того, чтобы помочь вам в вопросах строительства. На нашем портале вы найдёте материалы по строительству как частных домов, так и промышленных зданий и сооружений. Большое количество материалов посвящено строительным коммуникациям. Вот кратикий список тем, по которым у нас имеются статьи:
 					<% Category.all.each do |c| %>
@@ -16,13 +14,11 @@
 					<% end %>
 				</p>
 			</div>
-			<!-- /col #1 -->
 
-			<!-- col #2 -->
+			<!--noindex-->
 			<div class="col-md-4">
-				<h3 class="letter-spacing-1">Подписка на новости</h3>
+				<span class="letter-spacing-1" style="color: rgba(255, 255, 255, 0.8); font-weight: 600; font-size: 18px;">Подписка на новости</span>
 
-				<!-- Newsletter Form -->
 				<p>Вы можете подписаться на наши новые статьи</p>
 
 				<form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
@@ -34,15 +30,15 @@
 						</span>
 					</div>
 				</form>
-				<!-- /Newsletter Form -->
 
 			</div>
-			<!-- /col #2 -->
+			<!--/noindex-->
 
 		</div>
 
 	</div>
 
+	<!--noindex-->
 	<div class="copyright">
 		<div class="container">
 			<!--
@@ -55,7 +51,11 @@
 			&copy; При копировании информации ссылка на сайт обязательна.
 		</div>
 	</div>
+	<!--/noindex-->
 
 </footer>
 
+	<!--noindex-->
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<!--/noindex-->
+</div>

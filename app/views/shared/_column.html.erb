@@ -1,10 +1,11 @@
 <!-- RIGHT -->
 <div class="col-md-3 col-sm-3">
 
+	<!--noindex-->
 	<% if current_user && current_user.role == nil %>
     	<div class="text-center text-white margin-bottom-30">
     	    <div class="content-box content-box-bordered">
-    	        <div class="btn btn-success" style="font-size:18px; font-weight: bold"><%= link_to "Написать статью", new_article_path, :style => "color: #fff; text-decoration: none" %></div>
+    	        <div class="btn btn-success" style="font-size:18px; font-weight: bold"><%= link_to "Написать статью", new_article_path, :style => "color: #fff; text-decoration: none", :rel => "nofollow" %></div>
     	    </div>
     	</div>
     	<hr />
@@ -12,11 +13,10 @@
         <%= render "/users/admin_menu" %>
         <hr />
 	<% end %>
+	<!--/noindex-->
 
-	
-
-	<!-- TAGS -->
-	<h3 class="hidden-xs size-16 margin-bottom-20">Темы статей</h3>
+	<!--noindex-->
+	<div class="hidden-xs size-16 margin-bottom-20 h3">Темы статей</div>
 	<div class="hidden-xs margin-bottom-20">
 
 		<% ActsAsTaggableOn::Tag.most_used(7).each do |tag| %>
@@ -24,6 +24,7 @@
 		<% end %>
 
 	</div>
+	<!--/noindex-->
 
     <aside class="content-box-bordered mt30-xs mb30">
         <nav>
@@ -44,57 +45,53 @@
         </nav>
     </aside>
 
-	<h3 class="hidden-xs size-16 margin-bottom-10 margin-top-30">Последние статьи</h3>
+    <!--noindex-->
+	<div class="hidden-xs size-16 margin-bottom-10 margin-top-30 h3">Последние статьи</div>
 
-	<!-- JUSTIFIED TAB -->
 	<div class="tabs nomargin-top hidden-xs margin-bottom-10">
 
 		<div class="tab-content margin-bottom-10 margin-top-10">
 
-			<!-- POPULAR -->
 			<div id="tab_1" class="tab-pane active">
 
 				<% Article.where("view = ?", true).order("created_at DESC").limit(3).each do |article| %>
-					<div class="row tab-post"><!-- post -->
+					<div class="row tab-post">
 						<div class="col-md-3 col-sm-3 col-xs-3">
-							<a href="blog-sidebar-left.html">
-								<%= link_to ( image_tag article.image.thumb.url, :width => "50", :alt => article.name ), category_article_path(article.category, article) %>
-							</a>
+							<%= link_to ( image_tag article.image.thumb.url, :width => "50", :alt => article.name ), category_article_path(article.category, article), :rel => "nofollow" %>
 						</div>
 						<div class="col-md-9 col-sm-9 col-xs-9">
 							<%= link_to article.name, category_article_path(article.category, article), :class => "tab-post-link" %>
 							<small><%= Russian::strftime(article.created_at, "%d %B %Y") %></small>
 						</div>
-					</div><!-- /post -->
+					</div>
 				<% end %>
 
 			</div>
-			<!-- /POPULAR -->
 
 		</div>
 
 	</div>
-	<!-- JUSTIFIED TAB -->
+	<!--/noindex-->
 
+	<!--
 	<hr />
-
-	<!-- SOCIAL ICONS -->
+	
 	<div class="hidden-xs margin-top-30 margin-bottom-60">
-		<a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+		<a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook" rel="nofollow" >
 			<i class="fa fa-facebook"></i>
 			<i class="fa fa-facebook"></i>
 		</a>
 
-		<a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+		<a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter" rel="nofollow">
 			<i class="fa fa-twitter"></i>
 			<i class="fa fa-twitter"></i>
 		</a>
 
-		<a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
+		<a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus" rel="nofollow">
 			<i class="fa fa-google-plus"></i>
 			<i class="fa fa-google-plus"></i>
 		</a>
-
 	</div>
+	-->
 
 </div>

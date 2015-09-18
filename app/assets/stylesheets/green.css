@@ -1,3 +1,28 @@
+.h1 {
+	margin: 0px;
+	padding: 0px 15px 0px 0px;
+	background-color: #FFF;
+	position: relative;
+	display: inline-block;
+	font-size: 36px;
+	font-family: 'Raleway','Open Sans',Arial,Helvetica,sans-serif;
+	font-weight: 600;
+	color: #414141;
+	line-height: 1.5;
+}
+
+.h3 {
+	letter-spacing: normal;
+	margin: 0px 0px 32px;
+	
+	font-family: "Raleway","Open Sans",Arial,Helvetica,sans-serif;
+	font-weight: 600;
+	color: #414141;
+}
+
+
+
+
 /** Green	#8ab933
  **************************************************************** **/
 	::selection {

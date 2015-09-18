@@ -12,4 +12,8 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
   
+  def original_url
+    base_url + original_fullpath
+  end
+
 end
