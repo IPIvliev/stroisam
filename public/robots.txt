@@ -5,6 +5,6 @@
  Disallow: /users*
 
  User-agent: *
- Host: ???.??
+ Host: www.nipe.ru
 
-Sitemap: http://???.??/sitemaps/sitemap.xml.gz
+Sitemap: http://www.nipe.ru/sitemaps/sitemap.xml.gz
