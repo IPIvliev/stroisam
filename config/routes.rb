@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'categories' => 'categories#index', as: :categories
   match 'categories/new' => 'categories#new', via: [:get, :post], as: :new_category
-  post '/:id' => 'categories#create'
+  #post '/:id' => 'categories#create'
   match ':id/edit' => 'categories#edit', via: [:get, :post], as: :edit_category  
 
   get "/index.html", to: "static_pages#index"
