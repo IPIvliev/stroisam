@@ -6011,8 +6011,12 @@ section.dark #portfolio h3 {
 	padding-bottom:10px;
 	border-bottom:#eee 1px solid;
 	position:relative;
+}
+
+.index-page {
 	height: 610px;
 }
+
 	section.dark .blog-post-item {
 		border-bottom:#444 1px solid;
 	}
