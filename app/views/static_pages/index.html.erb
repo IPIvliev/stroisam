@@ -12,7 +12,7 @@
 										<figure class="margin-bottom-10">
 											<%= image_tag a.image.thumb.url, :class => "img-responsive", :alt => a.name %>
 										</figure>
-										<h2><%= link_to (truncate(a.name, :length => 30, :omission => "...")).html_safe, category_article_path(a.category, a) %></h2>
+										<h2><%= link_to a.name, category_article_path(a.category, a) %></h2>
 										<ul class="blog-post-info list-inline" style="margin-bottom: 10px;">
 											<li>
 												<i class="fa fa-clock-o"></i> 
@@ -25,7 +25,7 @@
 												</li>
 											<% end %>
 										</ul>
-										<p style="text-align: justify;"><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 150, :omission => "...").html_safe %></p>
+										<p style="text-align: justify;"><%= truncate( raw( sanitize(a.text, :tags => %w(strong), :attributes => %w(id class style) ) ), :length => 100, :omission => "...").html_safe %></p>
 										<%= link_to "<i class='fa fa-plus'></i><span>Читать полностью</span>".html_safe, category_article_path(a.category, a), :class => "btn btn-reveal btn-default", :rel => "nofollow" %>
 									</div>
 								<% end %>
