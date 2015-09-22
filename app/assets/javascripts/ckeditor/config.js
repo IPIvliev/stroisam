@@ -6,6 +6,6 @@ CKEDITOR.config.toolbar_mini =
       ["JustifyLeft","JustifyCenter","JustifyRight","JustifyBlock"],
       ["Link","Unlink"],
       ["Image","Table","HorizontalRule"],
-      ["Styles","Format","Font","FontSize"],
+      ["Source", "Styles","Format","Font","FontSize"],
       ["TextColor","BGColor"]
   ];
