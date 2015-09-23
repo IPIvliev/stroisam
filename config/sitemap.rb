@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://nipe.ru"
+SitemapGenerator::Sitemap.default_host = "http://www.nipe.ru"
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
