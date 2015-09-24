@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
                 <label>Текст</label>
-                <%= f.cktext_area :text, :class => "form-control", :rows => "20", :required => true, :ckeditor => { :toolbar => 'mini'} %>
+                <%= f.text_area :text, :class => "form-control ckeditor", :id => "texxt", :rows => "20", :required => true %>
             </div>
             <%= f.submit "Отправить", :class => "btn btn-rw btn-primary" %>
             <%= link_to "Отменить", :back, :class => "btn btn-royal btn-rw" %>
@@ -76,3 +76,10 @@
 				</div>
 			</section>
 			<!-- / -->
+
+    <script>
+        $(document).ready(function () { $("#texxt").cleditor(); });
+    </script>
+    <link rel="stylesheet" href="/cleditor/jquery.cleditor.css" />
+    <script src="/cleditor/jquery.min.js"></script>
+    <script src="/cleditor/jquery.cleditor.min.js"></script>

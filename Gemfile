@@ -14,7 +14,7 @@ gem 'omniauth'
 gem 'russian', '~> 0.6.0'
 gem 'kaminari'
 gem 'truncate_html'
-gem 'ckeditor'
+#gem 'ckeditor'
 
 #Tables
 gem 'wice_grid'
