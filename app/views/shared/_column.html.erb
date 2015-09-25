@@ -20,7 +20,7 @@
 	<div class="hidden-xs margin-bottom-20">
 
 		<% ActsAsTaggableOn::Tag.most_used(7).each do |tag| %>
-			<%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag" %>
+			<%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag", :rel => "nofollow" %>
 		<% end %>
 
 	</div>
