@@ -1,12 +1,15 @@
  User-agent: Yandex
- Disallow: /users*
- Disallow: /*edit
+  Disallow: /users*
+  Disallow: /*edit
+  Disallow: /tag*
 
  User-agent: Googlebot
- Disallow: /users*
- Disallow: /*edit
+  Disallow: /users*
+  Disallow: /*edit
+  Disallow: /tag*
 
  User-agent: *
- Host: www.nipe.ru
+  Host: www.nipe.ru
+  Disallow: /tags*
 
 Sitemap: http://www.nipe.ru/sitemaps/sitemap.xml.gz
