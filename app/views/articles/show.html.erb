@@ -54,10 +54,13 @@
 
                 <div class="divider divider-dotted"><!-- divider --></div>
 
+                <!--noindex-->
                 <% @article.tag_list.each do |tag| %>
                   <% tag = ActsAsTaggableOn::Tag.find_by_name(tag) %>
-                  <%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag" %>
+                  <%= link_to "<span class='txt'>#{tag}</span><span class='num'>#{Article.where('view = ?', true).tagged_with(tag).count}</span>".html_safe, tag_path(tag.slug), :class => "tag", :rel => "nofollow" %>
                 <% end %>
+                <!--/noindex-->
+
               </div>
               <div class="clearfix margin-top-30 row">
                 <div class="hidden-xs size-16 h3">Похожие статьи</div>
