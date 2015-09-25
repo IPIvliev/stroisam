@@ -2,12 +2,15 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
+    set_meta_tags noindex: true
+
     @categories = initialize_grid(Category, include: [:articles])
   end
 
   def new
     @category = Category.new
 
+    set_meta_tags noindex: true
   end
 
   def destroy
@@ -33,6 +36,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    set_meta_tags noindex: true
   end
 
   def update

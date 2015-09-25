@@ -4,6 +4,8 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
+    set_meta_tags noindex: true
+
       @articles = initialize_grid(Article,
         order:           'articles.created_at',
         order_direction: 'desc',
@@ -28,7 +30,9 @@ class ArticlesController < ApplicationController
 
     set_meta_tags :title => @article.name,
               :description => @article.description,
-              :keywords => @article.keywords    
+              :keywords => @article.keywords
+
+    set_meta_tags canonical: "#{request.base_url}/#{@article.category.slug}/#{@article.slug}"
   end
 
   def comment_create
@@ -53,11 +57,14 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
+    set_meta_tags noindex: true
+
     @article = Article.new
   end
 
   # GET /articles/1/edit
   def edit
+    set_meta_tags noindex: true
   end
 
   # POST /articles

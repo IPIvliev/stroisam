@@ -1,5 +1,3 @@
-<link rel="canonical" href="<%= "http://www.nipe.ru/#{@article.category.slug}/#{@article.slug}" %>"/>
-
       <section>
         <div class="container">
 
@@ -41,7 +39,7 @@
                     <% if current_user == @article.user || current_user.role == "admin" %>
                     <li>
                       <span class="font-lato">
-                        <%= link_to "Редактировать статью", edit_category_article_path(@article.category, @article) %>
+                        <%= link_to "Редактировать статью", edit_category_article_path(@article.category, @article), :rel => "nofollow" %>
                       </span>
                     </li>
                     <% end %>

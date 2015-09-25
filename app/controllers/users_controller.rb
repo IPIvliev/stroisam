@@ -10,12 +10,16 @@ class UsersController < ApplicationController
         order:           'users.created_at',
         order_direction: 'desc',
     )
+
+    set_meta_tags noindex: true
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
     @articles = User.find(params[:id]).articles.where("view = true").order("created_at DESC").page params[:page]
+
+    set_meta_tags noindex: true
   end
 
   def destroy
