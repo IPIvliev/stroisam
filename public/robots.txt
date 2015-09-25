@@ -1,8 +1,10 @@
  User-agent: Yandex
- Disallow: /users* 
+ Disallow: /users*
+ Disallow: /*edit
 
  User-agent: Googlebot
  Disallow: /users*
+ Disallow: /*edit
 
  User-agent: *
  Host: www.nipe.ru
