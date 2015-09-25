@@ -14,6 +14,7 @@ class ArticlesController < ApplicationController
 
   def tag
     @articles = if params[:tag]
+        set_meta_tags :title => params[:tag]
       tag = ActsAsTaggableOn::Tag.find_by_slug(params[:tag])
       Article.where("view = ?", true).order("created_at DESC").friendly.tagged_with(tag).page(params[:page]).per(5)
     else
